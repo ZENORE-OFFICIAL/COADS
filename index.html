@@ -413,15 +413,18 @@ Place Order
 
 <h2>Order Details</h2>
 
-<form onsubmit="submitOrder(event)">
 
-<input type="text" placeholder="Your Name" required>
+<form name="orders" method="POST" data-netlify="true" onsubmit="submitOrder(event)">
 
-<input type="text" placeholder="Address" required>
+<input type="hidden" name="form-name" value="orders">
 
-<input type="tel" placeholder="Phone Number" required>
+<input type="text" name="name" placeholder="Your Name" required>
 
-<select required>
+<input type="text" name="address" placeholder="Address" required>
+
+<input type="tel" name="phone" placeholder="Phone Number" required>
+
+<select name="payment" required>
 
 <option value="">Select Payment Method</option>
 <option>bKash</option>
