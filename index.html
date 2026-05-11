@@ -284,8 +284,6 @@ width:100%;
 
 <body>
 
-<!-- HEADER -->
-
 <header>
 
 <div class="logo">
@@ -299,8 +297,6 @@ ZENORÉ
 
 </header>
 
-<!-- HERO -->
-
 <section class="hero">
 
 <h1>Premium Streetwear</h1>
@@ -308,8 +304,6 @@ ZENORÉ
 <p>Minimal • Bold • Modern</p>
 
 </section>
-
-<!-- PRODUCTS -->
 
 <section class="products">
 
@@ -399,9 +393,13 @@ Place Order
 
 <h2>Order Details</h2>
 
-<form name="orders" method="POST" data-netlify="true" onsubmit="showThankYou()">
+<form name="orders" method="POST" data-netlify="true" onsubmit="prepareOrder()">
 
 <input type="hidden" name="form-name" value="orders">
+
+<input type="hidden" name="products" id="productsInput">
+
+<input type="hidden" name="total" id="totalInput">
 
 <input type="text" name="name" placeholder="Your Name" required>
 
@@ -413,11 +411,7 @@ Place Order
 
 <option value="">Select Payment Method</option>
 
-<option>bKash</option>
-
-<option>Nagad</option>
-
-<option>Rocket</option>
+<option>bKash - 01987696988</option>
 
 <option>Cash On Delivery</option>
 
@@ -443,15 +437,11 @@ Thanks for your order from ZENORÉ.
 
 </section>
 
-<!-- COMING -->
-
 <section class="coming">
 
 More Products Coming Soon
 
 </section>
-
-<!-- FOOTER -->
 
 <footer>
 
@@ -470,8 +460,6 @@ Facebook
 </div>
 
 </footer>
-
-<!-- SCRIPT -->
 
 <script>
 
@@ -560,7 +548,19 @@ window.scrollTo(0,0);
 
 }
 
-function showThankYou(){
+function prepareOrder(){
+
+let productList = "";
+
+cart.forEach(item=>{
+
+productList += item.name + " - ৳" + item.price + ", ";
+
+});
+
+document.getElementById('productsInput').value = productList;
+
+document.getElementById('totalInput').value = total;
 
 setTimeout(()=>{
 
