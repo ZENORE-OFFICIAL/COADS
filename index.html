@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>ZENORÉ Clothing</title>
+
+<meta name="google-site-verification" content="ughdRJwnZYBhZX-ZGCb6A0HkGrraZXJfPtuDsrSskwY" />
 
 <style>
 
@@ -61,6 +66,7 @@ width:90%;
 max-width:420px;
 transition:0.3s;
 cursor:pointer;
+border:1px solid maroon;
 }
 
 .product:hover{
@@ -92,6 +98,16 @@ font-weight:bold;
 .product-page{
 display:none;
 padding:30px;
+}
+
+.back-btn{
+padding:12px 20px;
+margin-bottom:20px;
+background:maroon;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
 }
 
 .product-page img{
@@ -145,6 +161,7 @@ padding:20px;
 transition:0.4s;
 overflow:auto;
 z-index:2000;
+border-left:2px solid maroon;
 }
 
 .cart.active{
@@ -187,6 +204,8 @@ padding:15px;
 margin-bottom:15px;
 border:none;
 border-radius:10px;
+background:#111;
+color:white;
 }
 
 .place-order{
@@ -214,6 +233,7 @@ border-radius:15px;
 text-align:center;
 z-index:5000;
 box-shadow:0 0 20px red;
+border:1px solid maroon;
 }
 
 .popup h1{
@@ -249,13 +269,16 @@ color:#aaa;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <header>
 
-<div class="logo">ZENORÉ</div>
+<div class="logo">
+ZENORÉ
+</div>
 
 <div class="cart-btn" onclick="openCart()">
 🛒 <span id="cart-count">0</span>
@@ -333,7 +356,7 @@ More Products Coming Soon
 
 <section class="product-page" id="product-page">
 
-<button onclick="goHome()" style="padding:10px 20px;margin-bottom:20px;">
+<button class="back-btn" onclick="goHome()">
 ← Back
 </button>
 
@@ -341,17 +364,25 @@ More Products Coming Soon
 
 <h1 id="product-name"></h1>
 
-<h2 style="color:red;margin-top:10px;">৳899</h2>
+<h2 style="color:red;margin-top:10px;">
+৳899
+</h2>
 
 <p id="product-desc" style="margin-top:20px;font-size:18px;"></p>
 
 <div class="sizes">
 
-<h3 style="margin-bottom:15px;">Select Size</h3>
+<h3 style="margin-bottom:15px;">
+Select Size
+</h3>
 
-<button class="size-btn" onclick="selectSize(this,'M')">M</button>
+<button class="size-btn" onclick="selectSize(this,'M')">
+M
+</button>
 
-<button class="size-btn" onclick="selectSize(this,'L')">L</button>
+<button class="size-btn" onclick="selectSize(this,'L')">
+L
+</button>
 
 </div>
 
@@ -369,7 +400,9 @@ Add To Cart
 
 <div id="cart-items"></div>
 
-<h3 id="total">Total: ৳0</h3>
+<h3 id="total">
+Total: ৳0
+</h3>
 
 <button class="checkout-btn" onclick="openCheckout()">
 Place Order
@@ -381,9 +414,13 @@ Place Order
 
 <section class="checkout" id="checkout">
 
-<h1 style="margin-bottom:20px;">Checkout</h1>
+<h1 style="margin-bottom:20px;">
+Checkout
+</h1>
 
-<form action="https://formspree.io/f/xwpobzbe" method="POST" onsubmit="showThanks(event)">
+<form name="orders" method="POST" data-netlify="true" onsubmit="showThanks(event)">
+
+<input type="hidden" name="form-name" value="orders">
 
 <input type="text" name="Name" placeholder="Your Name" required>
 
@@ -405,9 +442,13 @@ Confirm Order
 
 <div class="popup" id="popup">
 
-<h1>Thank You ❤️</h1>
+<h1>
+Thank You ❤️
+</h1>
 
-<p>Your order has been placed successfully.</p>
+<p>
+Your order has been placed successfully.
+</p>
 
 </div>
 
@@ -464,8 +505,12 @@ desc:"Premium drop shoulders. Colour: White."
 ];
 
 let selectedProduct = null;
+
 let selectedSize = "";
+
 let cart = [];
+
+/* OPEN PRODUCT */
 
 function openProduct(index){
 
@@ -485,6 +530,8 @@ document.getElementById("product-desc").innerText=selectedProduct.desc;
 
 }
 
+/* BACK HOME */
+
 function goHome(){
 
 document.getElementById("products").style.display="flex";
@@ -497,6 +544,8 @@ document.getElementById("checkout").style.display="none";
 
 }
 
+/* SELECT SIZE */
+
 function selectSize(btn,size){
 
 selectedSize=size;
@@ -506,6 +555,8 @@ document.querySelectorAll(".size-btn").forEach(b=>b.classList.remove("selected")
 btn.classList.add("selected");
 
 }
+
+/* ADD TO CART */
 
 function addToCart(){
 
@@ -518,9 +569,13 @@ return;
 }
 
 cart.push({
+
 name:selectedProduct.name,
+
 size:selectedSize,
+
 price:899
+
 });
 
 updateCart();
@@ -528,6 +583,8 @@ updateCart();
 alert("Added to cart");
 
 }
+
+/* UPDATE CART */
 
 function updateCart(){
 
@@ -546,11 +603,17 @@ cart.forEach(item=>{
 total+=item.price;
 
 cartItems.innerHTML+=`
+
 <div class="cart-item">
+
 <h3>${item.name}</h3>
+
 <p>Size: ${item.size}</p>
+
 <p>৳${item.price}</p>
+
 </div>
+
 `;
 
 orderText += item.name + " | Size: " + item.size + " | ৳899\n";
@@ -563,13 +626,25 @@ document.getElementById("order-data").value=orderText;
 
 }
 
+/* OPEN CART */
+
 function openCart(){
 
 document.getElementById("cart").classList.toggle("active");
 
 }
 
+/* OPEN CHECKOUT */
+
 function openCheckout(){
+
+if(cart.length===0){
+
+alert("Your cart is empty");
+
+return;
+
+}
 
 document.getElementById("products").style.display="none";
 
@@ -581,17 +656,53 @@ document.getElementById("checkout").style.display="block";
 
 }
 
+/* THANK YOU + NETLIFY FORM */
+
 function showThanks(event){
 
 event.preventDefault();
 
+const form = event.target;
+
+const formData = new FormData(form);
+
+fetch("/",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/x-www-form-urlencoded"
+},
+
+body:new URLSearchParams(formData).toString()
+
+})
+
+.then(()=>{
+
 document.getElementById("popup").style.display="block";
+
+form.reset();
+
+cart=[];
+
+updateCart();
 
 setTimeout(()=>{
 
-event.target.submit();
+document.getElementById("popup").style.display="none";
 
-},1200);
+goHome();
+
+},2000);
+
+})
+
+.catch(()=>{
+
+alert("Order failed");
+
+});
 
 }
 
