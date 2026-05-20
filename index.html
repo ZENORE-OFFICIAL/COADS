@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>ZENORÉ Clothing</title>
 
 <style>
@@ -12,7 +11,7 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial, sans-serif;
+font-family:Arial,sans-serif;
 }
 
 body{
@@ -47,32 +46,35 @@ cursor:pointer;
 /* PRODUCTS */
 
 .products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+display:flex;
+flex-direction:column;
 gap:25px;
 padding:30px;
+align-items:center;
 }
 
 .product{
 background:#111;
-border-radius:12px;
+border-radius:15px;
 overflow:hidden;
+width:90%;
+max-width:420px;
 transition:0.3s;
 cursor:pointer;
 }
 
 .product:hover{
-transform:scale(1.03);
+transform:scale(1.02);
 }
 
 .product img{
 width:100%;
-height:320px;
+height:500px;
 object-fit:cover;
 }
 
 .product-info{
-padding:15px;
+padding:20px;
 }
 
 .product-info h2{
@@ -81,7 +83,7 @@ margin-bottom:10px;
 
 .price{
 color:red;
-font-size:20px;
+font-size:22px;
 font-weight:bold;
 }
 
@@ -94,8 +96,8 @@ padding:30px;
 
 .product-page img{
 width:100%;
-max-width:400px;
-border-radius:12px;
+max-width:420px;
+border-radius:15px;
 margin-bottom:20px;
 }
 
@@ -104,13 +106,14 @@ margin:20px 0;
 }
 
 .size-btn{
-padding:10px 18px;
+padding:12px 20px;
 margin-right:10px;
 border:none;
 background:white;
+color:black;
 cursor:pointer;
 font-weight:bold;
-border-radius:6px;
+border-radius:8px;
 }
 
 .selected{
@@ -125,7 +128,8 @@ color:white;
 border:none;
 font-size:18px;
 cursor:pointer;
-border-radius:8px;
+border-radius:10px;
+margin-top:20px;
 }
 
 /* CART */
@@ -166,7 +170,7 @@ color:white;
 font-size:18px;
 cursor:pointer;
 margin-top:20px;
-border-radius:8px;
+border-radius:10px;
 }
 
 /* CHECKOUT */
@@ -182,7 +186,7 @@ width:100%;
 padding:15px;
 margin-bottom:15px;
 border:none;
-border-radius:8px;
+border-radius:10px;
 }
 
 .place-order{
@@ -193,31 +197,35 @@ color:white;
 border:none;
 font-size:18px;
 cursor:pointer;
-border-radius:8px;
+border-radius:10px;
 }
 
-/* THANK YOU */
+/* THANK YOU POPUP */
 
-.thankyou{
+.popup{
 display:none;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#111;
+padding:40px;
+border-radius:15px;
 text-align:center;
-padding:20px;
+z-index:5000;
+box-shadow:0 0 20px red;
 }
 
-.thankyou h1{
-font-size:50px;
-margin-bottom:20px;
+.popup h1{
 color:red;
+margin-bottom:15px;
 }
+
+/* FOOTER */
 
 footer{
 background:#111;
-padding:30px;
+padding:40px 20px;
 text-align:center;
 margin-top:40px;
 }
@@ -226,10 +234,18 @@ margin-top:40px;
 color:white;
 text-decoration:none;
 margin:10px;
+padding:12px 20px;
 border:1px solid white;
-padding:10px 20px;
-border-radius:8px;
+border-radius:10px;
 display:inline-block;
+background:maroon;
+}
+
+.coming{
+text-align:center;
+font-size:28px;
+padding:60px 20px;
+color:#aaa;
 }
 
 </style>
@@ -238,8 +254,13 @@ display:inline-block;
 <body>
 
 <header>
+
 <div class="logo">ZENORÉ</div>
-<div class="cart-btn" onclick="openCart()">🛒 <span id="cart-count">0</span></div>
+
+<div class="cart-btn" onclick="openCart()">
+🛒 <span id="cart-count">0</span>
+</div>
+
 </header>
 
 <!-- PRODUCTS -->
@@ -247,43 +268,74 @@ display:inline-block;
 <section class="products" id="products">
 
 <div class="product" onclick="openProduct(0)">
+
 <img src="alone.png">
+
 <div class="product-info">
+
 <h2>ALONE</h2>
+
 <p class="price">৳899</p>
+
 </div>
+
 </div>
 
 <div class="product" onclick="openProduct(1)">
+
 <img src="starboy.png">
+
 <div class="product-info">
+
 <h2>STARBOY</h2>
+
 <p class="price">৳899</p>
+
 </div>
+
 </div>
 
 <div class="product" onclick="openProduct(2)">
+
 <img src="artistic.png">
+
 <div class="product-info">
+
 <h2>ARTISTIC</h2>
+
 <p class="price">৳899</p>
+
 </div>
+
 </div>
 
 <div class="product" onclick="openProduct(3)">
+
 <img src="timeless.png">
+
 <div class="product-info">
+
 <h2>TIMELESS</h2>
+
 <p class="price">৳899</p>
+
 </div>
+
 </div>
 
 </section>
 
+<div class="coming">
+More Products Coming Soon
+</div>
+
 <!-- PRODUCT PAGE -->
 
 <section class="product-page" id="product-page">
-<button onclick="goHome()" style="margin-bottom:20px;padding:10px 20px;">← Back</button>
+
+<button onclick="goHome()" style="padding:10px 20px;margin-bottom:20px;">
+← Back
+</button>
 
 <img id="product-img">
 
@@ -291,18 +343,21 @@ display:inline-block;
 
 <h2 style="color:red;margin-top:10px;">৳899</h2>
 
-<p id="product-desc" style="margin-top:20px;"></p>
+<p id="product-desc" style="margin-top:20px;font-size:18px;"></p>
 
 <div class="sizes">
-<h3>Select Size</h3>
-<br>
+
+<h3 style="margin-bottom:15px;">Select Size</h3>
 
 <button class="size-btn" onclick="selectSize(this,'M')">M</button>
+
 <button class="size-btn" onclick="selectSize(this,'L')">L</button>
 
 </div>
 
-<button class="add-cart" onclick="addToCart()">Add To Cart</button>
+<button class="add-cart" onclick="addToCart()">
+Add To Cart
+</button>
 
 </section>
 
@@ -316,7 +371,9 @@ display:inline-block;
 
 <h3 id="total">Total: ৳0</h3>
 
-<button class="checkout-btn" onclick="openCheckout()">Place Order</button>
+<button class="checkout-btn" onclick="openCheckout()">
+Place Order
+</button>
 
 </div>
 
@@ -326,7 +383,7 @@ display:inline-block;
 
 <h1 style="margin-bottom:20px;">Checkout</h1>
 
-<form action="https://formspree.io/f/xwpobzbe" method="POST">
+<form action="https://formspree.io/f/xwpobzbe" method="POST" onsubmit="showThanks(event)">
 
 <input type="text" name="Name" placeholder="Your Name" required>
 
@@ -336,7 +393,7 @@ display:inline-block;
 
 <input type="hidden" name="Order" id="order-data">
 
-<button type="submit" class="place-order" onclick="showThanks()">
+<button type="submit" class="place-order">
 Confirm Order
 </button>
 
@@ -344,29 +401,37 @@ Confirm Order
 
 </section>
 
-<!-- THANK YOU -->
+<!-- THANK YOU POPUP -->
 
-<section class="thankyou" id="thankyou">
+<div class="popup" id="popup">
 
 <h1>Thank You ❤️</h1>
 
-<p>Thanks for your order from ZENORÉ.</p>
+<p>Your order has been placed successfully.</p>
+
+</div>
+
+<!-- FOOTER -->
 
 <footer>
 
-<h2 style="margin-bottom:20px;">Follow ZENORÉ</h2>
+<h2 style="margin-bottom:20px;">
+Follow ZENORÉ
+</h2>
 
 <div class="socials">
 
-<a href="https://www.instagram.com/zenore__official/">Instagram</a>
+<a href="https://www.instagram.com/zenore__official/" target="_blank">
+Instagram
+</a>
 
-<a href="https://www.facebook.com/profile.php?id=61589171796226">Facebook</a>
+<a href="https://www.facebook.com/profile.php?id=61589171796226" target="_blank">
+Facebook
+</a>
 
 </div>
 
 </footer>
-
-</section>
 
 <script>
 
@@ -408,6 +473,8 @@ selectedProduct = products[index];
 
 document.getElementById("products").style.display="none";
 
+document.querySelector(".coming").style.display="none";
+
 document.getElementById("product-page").style.display="block";
 
 document.getElementById("product-img").src=selectedProduct.img;
@@ -420,7 +487,9 @@ document.getElementById("product-desc").innerText=selectedProduct.desc;
 
 function goHome(){
 
-document.getElementById("products").style.display="grid";
+document.getElementById("products").style.display="flex";
+
+document.querySelector(".coming").style.display="block";
 
 document.getElementById("product-page").style.display="none";
 
@@ -441,8 +510,11 @@ btn.classList.add("selected");
 function addToCart(){
 
 if(selectedSize==""){
+
 alert("Please select a size");
+
 return;
+
 }
 
 cart.push({
@@ -503,19 +575,23 @@ document.getElementById("products").style.display="none";
 
 document.getElementById("product-page").style.display="none";
 
+document.querySelector(".coming").style.display="none";
+
 document.getElementById("checkout").style.display="block";
 
 }
 
-function showThanks(){
+function showThanks(event){
+
+event.preventDefault();
+
+document.getElementById("popup").style.display="block";
 
 setTimeout(()=>{
 
-document.getElementById("checkout").style.display="none";
+event.target.submit();
 
-document.getElementById("thankyou").style.display="flex";
-
-},1000);
+},1200);
 
 }
 
