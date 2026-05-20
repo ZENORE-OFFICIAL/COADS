@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="google-site-verification" content="ughdRJwnZYBhZX-ZGCb6A0HkGrraZXJfPtuDsrSskwY" />
-
-<title>ZENORÉ Clothing</title>
+<title>ZENORÉ</title>
 
 <style>
 
@@ -17,7 +13,7 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:Arial;
 }
 
 body{
@@ -35,16 +31,14 @@ justify-content:space-between;
 align-items:center;
 position:sticky;
 top:0;
-z-index:1000;
 }
 
 .logo{
-font-size:32px;
+font-size:28px;
 font-weight:bold;
-letter-spacing:3px;
 }
 
-.cart-btn{
+.cart{
 font-size:28px;
 cursor:pointer;
 }
@@ -54,83 +48,57 @@ cursor:pointer;
 .products{
 display:flex;
 flex-direction:column;
-gap:25px;
-padding:30px;
 align-items:center;
+gap:20px;
+padding:20px;
 }
 
 .product{
 background:#111;
+width:90%;
+max-width:400px;
 border-radius:15px;
 overflow:hidden;
-width:90%;
-max-width:420px;
 cursor:pointer;
-transition:0.3s;
 border:1px solid maroon;
-}
-
-.product:hover{
-transform:scale(1.02);
 }
 
 .product img{
 width:100%;
-height:500px;
+height:450px;
 object-fit:cover;
 }
 
-.product-info{
-padding:20px;
-}
-
-.product-info h2{
-margin-bottom:10px;
+.product h2{
+padding:10px;
 }
 
 .price{
-font-size:22px;
+padding:0 10px 15px;
 color:red;
 font-weight:bold;
 }
 
 /* PRODUCT PAGE */
 
-.product-page{
+.page{
 display:none;
-padding:30px;
+padding:20px;
 }
 
-.back-btn{
-padding:12px 20px;
-background:maroon;
-color:white;
-border:none;
-border-radius:8px;
-cursor:pointer;
-margin-bottom:20px;
-}
-
-.product-page img{
+.page img{
 width:100%;
-max-width:420px;
+max-width:400px;
 border-radius:15px;
-margin-bottom:20px;
 }
 
-.sizes{
-margin-top:25px;
-}
-
-.size-btn{
-padding:12px 20px;
-margin-right:10px;
+.btn{
+padding:10px 15px;
+margin:5px;
 background:white;
 color:black;
 border:none;
-border-radius:8px;
 cursor:pointer;
-font-weight:bold;
 }
 
 .selected{
@@ -138,86 +106,64 @@ background:red;
 color:white;
 }
 
-.add-cart{
-margin-top:25px;
-padding:15px 25px;
+.add{
+margin-top:15px;
+padding:12px;
 background:red;
 color:white;
 border:none;
+width:100%;
 border-radius:10px;
-font-size:18px;
-cursor:pointer;
 }
 
 /* CART */
 
-.cart{
+.cartBox{
 position:fixed;
-top:0;
 right:-100%;
-width:350px;
+top:0;
+width:320px;
 height:100%;
 background:#111;
 padding:20px;
+transition:0.3s;
 overflow:auto;
-transition:0.4s;
-z-index:2000;
-border-left:2px solid maroon;
 }
 
-.cart.active{
+.cartBox.active{
 right:0;
 }
 
-.cart h2{
-margin-bottom:20px;
-}
-
-.cart-item{
-padding-bottom:10px;
-margin-bottom:15px;
-border-bottom:1px solid gray;
-}
-
-.checkout-btn{
+.checkoutBtn{
 width:100%;
-padding:15px;
+padding:12px;
 background:red;
-color:white;
 border:none;
-border-radius:10px;
-font-size:18px;
-cursor:pointer;
-margin-top:20px;
+color:white;
+margin-top:15px;
 }
 
 /* CHECKOUT */
 
 .checkout{
 display:none;
-padding:30px;
+padding:20px;
 }
 
-.checkout input,
-.checkout textarea{
+input,textarea{
 width:100%;
-padding:15px;
-margin-bottom:15px;
-border:none;
-border-radius:10px;
+padding:12px;
+margin:10px 0;
 background:#111;
+border:none;
 color:white;
 }
 
-.place-order{
+.orderBtn{
 width:100%;
-padding:15px;
+padding:12px;
 background:red;
-color:white;
 border:none;
-border-radius:10px;
-font-size:18px;
-cursor:pointer;
 }
 
 /* POPUP */
@@ -229,44 +175,13 @@ top:50%;
 left:50%;
 transform:translate(-50%,-50%);
 background:#111;
-padding:40px;
-border-radius:15px;
-text-align:center;
-z-index:5000;
+padding:30px;
 border:1px solid maroon;
-box-shadow:0 0 20px red;
+text-align:center;
 }
 
 .popup h1{
 color:red;
-margin-bottom:15px;
-}
-
-/* FOOTER */
-
-footer{
-background:#111;
-padding:40px 20px;
-text-align:center;
-margin-top:40px;
-}
-
-.socials a{
-text-decoration:none;
-color:white;
-background:maroon;
-padding:12px 20px;
-border-radius:10px;
-margin:10px;
-display:inline-block;
-border:1px solid white;
-}
-
-.coming{
-text-align:center;
-padding:60px 20px;
-font-size:28px;
-color:#aaa;
 }
 
 </style>
@@ -276,441 +191,194 @@ color:#aaa;
 <body>
 
 <header>
-
-<div class="logo">
-ZENORÉ
-</div>
-
-<div class="cart-btn" onclick="openCart()">
-🛒 <span id="cart-count">0</span>
-</div>
-
+<div class="logo">ZENORÉ</div>
+<div class="cart" onclick="toggleCart()">🛒 <span id="count">0</span></div>
 </header>
 
 <!-- PRODUCTS -->
 
-<section class="products" id="products">
+<div class="products" id="products">
 
-<div class="product" onclick="openProduct(0)">
-
+<div class="product" onclick="openP(0)">
 <img src="alone.png">
-
-<div class="product-info">
-
 <h2>ALONE</h2>
-
 <p class="price">৳899</p>
-
 </div>
 
-</div>
-
-<div class="product" onclick="openProduct(1)">
-
+<div class="product" onclick="openP(1)">
 <img src="starboy.png">
-
-<div class="product-info">
-
 <h2>STARBOY</h2>
-
 <p class="price">৳899</p>
-
 </div>
 
-</div>
-
-<div class="product" onclick="openProduct(2)">
-
+<div class="product" onclick="openP(2)">
 <img src="artistic.png">
-
-<div class="product-info">
-
 <h2>ARTISTIC</h2>
-
 <p class="price">৳899</p>
-
 </div>
 
-</div>
-
-<div class="product" onclick="openProduct(3)">
-
+<div class="product" onclick="openP(3)">
 <img src="timeless.png">
-
-<div class="product-info">
-
 <h2>TIMELESS</h2>
-
 <p class="price">৳899</p>
-
 </div>
 
-</div>
-
-</section>
-
-<div class="coming">
-More Products Coming Soon
 </div>
 
 <!-- PRODUCT PAGE -->
 
-<section class="product-page" id="product-page">
+<div class="page" id="page">
 
-<button class="back-btn" onclick="goHome()">
-← Back
-</button>
+<img id="img">
 
-<img id="product-img">
+<h2 id="name"></h2>
 
-<h1 id="product-name"></h1>
+<p style="color:red;">৳899</p>
 
-<h2 style="color:red;margin-top:10px;">
-৳899
-</h2>
+<p>Premium Drop Shoulder Shirt</p>
 
-<p id="product-desc" style="margin-top:20px;font-size:18px;"></p>
+<h3>Select Size</h3>
 
-<div class="sizes">
+<button class="btn" onclick="size('M',this)">M</button>
+<button class="btn" onclick="size('L',this)">L</button>
 
-<h3 style="margin-bottom:15px;">
-Select Size
-</h3>
-
-<button class="size-btn" onclick="selectSize(this,'M')">
-M
-</button>
-
-<button class="size-btn" onclick="selectSize(this,'L')">
-L
-</button>
+<button class="add" onclick="add()">Add To Cart</button>
 
 </div>
 
-<button class="add-cart" onclick="addToCart()">
-Add To Cart
-</button>
-
-</section>
-
 <!-- CART -->
 
-<div class="cart" id="cart">
+<div class="cartBox" id="cartBox">
 
-<h2>Your Cart</h2>
+<h2>Cart</h2>
 
-<div id="cart-items"></div>
+<div id="items"></div>
 
-<h3 id="total">
-Total: ৳0
-</h3>
+<h3>Total: ৳<span id="total">0</span></h3>
 
-<button class="checkout-btn" onclick="openCheckout()">
-Place Order
-</button>
+<button class="checkoutBtn" onclick="checkout()">Place Order</button>
 
 </div>
 
 <!-- CHECKOUT -->
 
-<section class="checkout" id="checkout">
+<div class="checkout" id="checkout">
 
-<h1 style="margin-bottom:20px;">
-Checkout
-</h1>
+<h2>Checkout</h2>
 
-<form name="orders" method="POST" data-netlify="true" onsubmit="showThanks(event)">
+<form name="orders" method="POST" data-netlify="true" onsubmit="return submitForm()">
 
 <input type="hidden" name="form-name" value="orders">
 
-<input type="text" name="Name" placeholder="Your Name" required>
+<input type="text" name="Name" placeholder="Name" required>
+<input type="text" name="Phone" placeholder="Phone" required>
+<textarea name="Address" placeholder="Address" required></textarea>
 
-<input type="text" name="Phone" placeholder="Phone Number" required>
+<input type="hidden" name="Order" id="order">
 
-<textarea name="Address" placeholder="Your Address" required></textarea>
-
-<input type="hidden" name="Order" id="order-data">
-
-<button type="submit" class="place-order">
-Confirm Order
-</button>
+<button class="orderBtn" type="submit">Confirm Order</button>
 
 </form>
 
-</section>
+</div>
 
-<!-- THANK YOU POPUP -->
+<!-- POPUP -->
 
 <div class="popup" id="popup">
 
-<h1>
-Thank You ❤️
-</h1>
-
-<p>
-Your order has been placed successfully.
-</p>
+<h1>Thank You ❤️</h1>
+<p>Your order has been placed</p>
 
 </div>
-
-<!-- FOOTER -->
-
-<footer>
-
-<h2 style="margin-bottom:20px;">
-Follow ZENORÉ
-</h2>
-
-<div class="socials">
-
-<a href="https://www.instagram.com/zenore__official/" target="_blank">
-Instagram
-</a>
-
-<a href="https://www.facebook.com/profile.php?id=61589171796226" target="_blank">
-Facebook
-</a>
-
-</div>
-
-</footer>
 
 <script>
 
-const products = [
-
-{
-name:"ALONE",
-img:"alone.png",
-desc:"Premium drop shoulders. Colour: Maroon."
-},
-
-{
-name:"STARBOY",
-img:"starboy.png",
-desc:"Premium drop shoulders. Colour: Black."
-},
-
-{
-name:"ARTISTIC",
-img:"artistic.png",
-desc:"Premium drop shoulders. Colour: Bottle Green."
-},
-
-{
-name:"TIMELESS",
-img:"timeless.png",
-desc:"Premium drop shoulders. Colour: White."
-}
-
+let products = [
+{n:"ALONE",i:"alone.png"},
+{n:"STARBOY",i:"starboy.png"},
+{n:"ARTISTIC",i:"artistic.png"},
+{n:"TIMELESS",i:"timeless.png"}
 ];
 
-let selectedProduct = null;
-
+let current;
+let cart = [];
 let selectedSize = "";
 
-let cart = [];
+function openP(x){
 
-/* OPEN PRODUCT */
-
-function openProduct(index){
-
-selectedProduct = products[index];
+current = products[x];
 
 document.getElementById("products").style.display="none";
+document.getElementById("page").style.display="block";
 
-document.querySelector(".coming").style.display="none";
-
-document.getElementById("product-page").style.display="block";
-
-document.getElementById("product-img").src = selectedProduct.img;
-
-document.getElementById("product-name").innerText = selectedProduct.name;
-
-document.getElementById("product-desc").innerText = selectedProduct.desc;
+document.getElementById("img").src=current.i;
+document.getElementById("name").innerText=current.n;
 
 }
 
-/* GO HOME */
-
-function goHome(){
-
-document.getElementById("products").style.display="flex";
-
-document.querySelector(".coming").style.display="block";
-
-document.getElementById("product-page").style.display="none";
-
-document.getElementById("checkout").style.display="none";
-
+function size(s,b){
+selectedSize=s;
+document.querySelectorAll(".btn").forEach(x=>x.classList.remove("selected"));
+b.classList.add("selected");
 }
 
-/* SELECT SIZE */
+function add(){
 
-function selectSize(btn,size){
-
-selectedSize = size;
-
-document.querySelectorAll(".size-btn").forEach(b=>b.classList.remove("selected"));
-
-btn.classList.add("selected");
-
-}
-
-/* ADD TO CART */
-
-function addToCart(){
-
-if(selectedSize==""){
-
-alert("Please select a size");
-
+if(!selectedSize){
+alert("Select size");
 return;
-
 }
 
-cart.push({
-
-name:selectedProduct.name,
-
-size:selectedSize,
-
-price:899
-
-});
-
+cart.push({name:current.n,size:selectedSize,price:899});
 updateCart();
-
-alert("Added to cart");
-
+alert("Added");
 }
-
-/* UPDATE CART */
 
 function updateCart(){
 
-document.getElementById("cart-count").innerText = cart.length;
+document.getElementById("count").innerText=cart.length;
 
-const cartItems = document.getElementById("cart-items");
+let total=0;
+let text="";
 
-cartItems.innerHTML = "";
+document.getElementById("items").innerHTML="";
 
-let total = 0;
+cart.forEach(i=>{
+total+=i.price;
 
-let orderText = "";
+text+=`${i.name} | ${i.size} | 899\n`;
 
-cart.forEach(item=>{
-
-total += item.price;
-
-cartItems.innerHTML += `
-
-<div class="cart-item">
-
-<h3>${item.name}</h3>
-
-<p>Size: ${item.size}</p>
-
-<p>৳${item.price}</p>
-
-</div>
-
+document.getElementById("items").innerHTML+=`
+<p>${i.name} (${i.size}) - ৳899</p>
 `;
-
-orderText += item.name + " | Size: " + item.size + " | ৳899\n";
-
 });
 
-document.getElementById("total").innerText = "Total: ৳" + total;
-
-document.getElementById("order-data").value = orderText;
-
-}
-
-/* OPEN CART */
-
-function openCart(){
-
-document.getElementById("cart").classList.toggle("active");
+document.getElementById("total").innerText=total;
+document.getElementById("order").value=text;
 
 }
 
-/* OPEN CHECKOUT */
-
-function openCheckout(){
-
-if(cart.length===0){
-
-alert("Your cart is empty");
-
-return;
-
+function toggleCart(){
+document.getElementById("cartBox").classList.toggle("active");
 }
 
-document.getElementById("products").style.display="none";
-
-document.querySelector(".coming").style.display="none";
-
-document.getElementById("product-page").style.display="none";
-
+function checkout(){
 document.getElementById("checkout").style.display="block";
-
+document.getElementById("page").style.display="none";
 }
 
-/* SUBMIT ORDER */
-
-function showThanks(){
-
-event.preventDefault();
-
-const form = event.target;
-
-const formData = new FormData(form);
-
-fetch("/",{
-
-method:"POST",
-
-headers:{
-"Content-Type":"application/x-www-form-urlencoded"
-},
-
-body:new URLSearchParams(formData).toString()
-
-})
-
-.then(function(){
+function submitForm(){
 
 document.getElementById("popup").style.display="block";
 
-form.reset();
-
-cart = [];
-
-updateCart();
-
-setTimeout(function(){
-
-document.getElementById("popup").style.display="none";
-
-goHome();
-
-},2000);
-
-})
-
-.catch(function(){
-
-alert("Order failed");
-
-});
+setTimeout(()=>{
+document.forms["orders"].submit();
+},1200);
 
 return false;
-
 }
 
 </script>
 
 </body>
-
 </html>
