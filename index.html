@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>ZENORÉ</title>
 
 <style>
@@ -21,8 +19,6 @@ background:black;
 color:white;
 }
 
-/* HEADER */
-
 header{
 background:maroon;
 padding:20px;
@@ -31,6 +27,7 @@ justify-content:space-between;
 align-items:center;
 position:sticky;
 top:0;
+z-index:1000;
 }
 
 .logo{
@@ -42,8 +39,6 @@ font-weight:bold;
 font-size:28px;
 cursor:pointer;
 }
-
-/* PRODUCTS */
 
 .products{
 display:flex;
@@ -59,7 +54,6 @@ width:90%;
 max-width:400px;
 border-radius:15px;
 overflow:hidden;
-cursor:pointer;
 border:1px solid maroon;
 }
 
@@ -74,12 +68,15 @@ padding:10px;
 }
 
 .price{
-padding:0 10px 15px;
+padding:0 10px 10px;
 color:red;
 font-weight:bold;
 }
 
-/* PRODUCT PAGE */
+.stock{
+padding:0 10px 15px;
+color:#aaa;
+}
 
 .page{
 display:none;
@@ -116,8 +113,6 @@ width:100%;
 border-radius:10px;
 }
 
-/* CART */
-
 .cartBox{
 position:fixed;
 right:-100%;
@@ -128,6 +123,7 @@ background:#111;
 padding:20px;
 transition:0.3s;
 overflow:auto;
+z-index:2000;
 }
 
 .cartBox.active{
@@ -142,8 +138,6 @@ border:none;
 color:white;
 margin-top:15px;
 }
-
-/* CHECKOUT */
 
 .checkout{
 display:none;
@@ -164,9 +158,8 @@ width:100%;
 padding:12px;
 background:red;
 border:none;
+color:white;
 }
-
-/* POPUP */
 
 .popup{
 display:none;
@@ -178,16 +171,54 @@ background:#111;
 padding:30px;
 border:1px solid maroon;
 text-align:center;
+z-index:5000;
 }
 
 .popup h1{
 color:red;
 }
 
+.dashboard{
+padding:20px;
+background:#111;
+margin:20px;
+border-radius:15px;
+}
+
+.whatsapp{
+display:block;
+background:green;
+color:white;
+text-align:center;
+padding:15px;
+margin-top:15px;
+text-decoration:none;
+border-radius:10px;
+}
+
+.couponBox{
+margin-top:15px;
+}
+
+footer{
+background:#111;
+padding:40px 20px;
+text-align:center;
+margin-top:40px;
+}
+
+.socials a{
+text-decoration:none;
+color:white;
+background:maroon;
+padding:12px 20px;
+border-radius:10px;
+margin:10px;
+display:inline-block;
+}
+
 </style>
-
 </head>
-
 <body>
 
 <header>
@@ -195,37 +226,37 @@ color:red;
 <div class="cart" onclick="toggleCart()">🛒 <span id="count">0</span></div>
 </header>
 
-<!-- PRODUCTS -->
-
 <div class="products" id="products">
 
 <div class="product" onclick="openP(0)">
 <img src="alone.png">
 <h2>ALONE</h2>
 <p class="price">৳899</p>
+<p class="stock">Stock: 2</p>
 </div>
 
 <div class="product" onclick="openP(1)">
 <img src="starboy.png">
 <h2>STARBOY</h2>
 <p class="price">৳899</p>
+<p class="stock">Stock: 2</p>
 </div>
 
 <div class="product" onclick="openP(2)">
 <img src="artistic.png">
 <h2>ARTISTIC</h2>
 <p class="price">৳899</p>
+<p class="stock">Stock: 2</p>
 </div>
 
 <div class="product" onclick="openP(3)">
 <img src="timeless.png">
 <h2>TIMELESS</h2>
 <p class="price">৳899</p>
+<p class="stock">Stock: 2</p>
 </div>
 
 </div>
-
-<!-- PRODUCT PAGE -->
 
 <div class="page" id="page">
 
@@ -244,9 +275,11 @@ color:red;
 
 <button class="add" onclick="add()">Add To Cart</button>
 
-</div>
+<a class="whatsapp" id="waBtn" target="_blank">
+Order On WhatsApp
+</a>
 
-<!-- CART -->
+</div>
 
 <div class="cartBox" id="cartBox">
 
@@ -254,13 +287,16 @@ color:red;
 
 <div id="items"></div>
 
+<div class="couponBox">
+<input type="text" id="coupon" placeholder="Coupon Code">
+<button class="checkoutBtn" onclick="applyCoupon()">Apply Coupon</button>
+</div>
+
 <h3>Total: ৳<span id="total">0</span></h3>
 
 <button class="checkoutBtn" onclick="checkout()">Place Order</button>
 
 </div>
-
-<!-- CHECKOUT -->
 
 <div class="checkout" id="checkout">
 
@@ -271,7 +307,9 @@ color:red;
 <input type="hidden" name="form-name" value="orders">
 
 <input type="text" name="Name" placeholder="Name" required>
+
 <input type="text" name="Phone" placeholder="Phone" required>
+
 <textarea name="Address" placeholder="Address" required></textarea>
 
 <input type="hidden" name="Order" id="order">
@@ -282,27 +320,39 @@ color:red;
 
 </div>
 
-<!-- POPUP -->
-
 <div class="popup" id="popup">
-
 <h1>Thank You ❤️</h1>
 <p>Your order has been placed</p>
-
 </div>
+
+<div class="dashboard">
+<h2>Admin Dashboard</h2>
+<p>Total Orders: Check in Netlify Forms</p>
+<p>Real-time Notifications: Enable Netlify email notifications</p>
+<p>Coupon Code: ZENORE10 gives ৳100 off</p>
+</div>
+
+<footer>
+<h2>Follow ZENORÉ</h2>
+<div class="socials">
+<a href="https://www.instagram.com/zenore__official/" target="_blank">Instagram</a>
+<a href="https://www.facebook.com/profile.php?id=61589171796226" target="_blank">Facebook</a>
+</div>
+</footer>
 
 <script>
 
 let products = [
-{n:"ALONE",i:"alone.png"},
-{n:"STARBOY",i:"starboy.png"},
-{n:"ARTISTIC",i:"artistic.png"},
-{n:"TIMELESS",i:"timeless.png"}
+{name:"ALONE",i:"alone.png"},
+{name:"STARBOY",i:"starboy.png"},
+{name:"ARTISTIC",i:"artistic.png"},
+{name:"TIMELESS",i:"timeless.png"}
 ];
 
 let current;
 let cart = [];
 let selectedSize = "";
+let discount = 0;
 
 function openP(x){
 
@@ -313,6 +363,9 @@ document.getElementById("page").style.display="block";
 
 document.getElementById("img").src=current.i;
 document.getElementById("name").innerText=current.n;
+
+document.getElementById("waBtn").href =
+"https://wa.me/8801611111523?text=I want to order " + current.n;
 
 }
 
@@ -330,13 +383,14 @@ return;
 }
 
 cart.push({name:current.n,size:selectedSize,price:899});
+
 updateCart();
-alert("Added");
+
+alert("Added To Cart");
+
 }
 
 function updateCart(){
-
-document.getElementById("count").innerText=cart.length;
 
 let total=0;
 let text="";
@@ -344,17 +398,38 @@ let text="";
 document.getElementById("items").innerHTML="";
 
 cart.forEach(i=>{
-total+=i.price;
 
-text+=`${i.name} | ${i.size} | 899\n`;
+total += i.price;
 
-document.getElementById("items").innerHTML+=`
+text += `${i.name} | ${i.size} | 899\n`;
+
+document.getElementById("items").innerHTML += `
 <p>${i.name} (${i.size}) - ৳899</p>
 `;
+
 });
 
+if(discount>0){
+total -= discount;
+}
+
+document.getElementById("count").innerText=cart.length;
 document.getElementById("total").innerText=total;
 document.getElementById("order").value=text;
+
+}
+
+function applyCoupon(){
+
+let code = document.getElementById("coupon").value;
+
+if(code==="newatzenore07"){
+discount = 0;
+alert("Coupon Applied");
+updateCart();
+}else{
+alert("Invalid Coupon");
+}
 
 }
 
@@ -369,13 +444,16 @@ document.getElementById("page").style.display="none";
 
 function submitForm(){
 
-document.getElementById("popup").style.display="block";
+document.getElementById("checkout").style.display = "none";
+
+document.getElementById("popup").style.display = "block";
 
 setTimeout(()=>{
-document.forms["orders"].submit();
+document.forms[0].submit();
 },1200);
 
 return false;
+
 }
 
 </script>
