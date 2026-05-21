@@ -342,7 +342,7 @@ let products = [
 {name:"TIMELESS",i:"timeless.png"}
 ];
 
-let current;
+let current = {};
 let cart = [];
 let selectedSize = "";
 let discount = 0;
@@ -351,17 +351,19 @@ function openP(x){
 
 current = products[x];
 
-document.getElementById("products").style.display="none";
-document.getElementById("page").style.display="block";
+document.getElementById("products").style.display = "none";
 
-document.getElementById("img").src=current.i;
-document.getElementById("name").innerText=current.n;
+document.getElementById("page").style.display = "block";
+
+document.getElementById("img").src = current.i;
+
+document.getElementById("name").innerText = current.n;
 
 document.getElementById("waBtn").href =
-
-"https://wa.me/8801611111523?text=I want to order%20" 
-+ encodeURIComponent(current.n)
-+ "%20from%20ZENORÉ";
+"https://wa.me/8801712345678?text=" +
+encodeURIComponent(
+"I want to order " + current.n + " from ZENORÉ"
+);
 
 }
 
@@ -442,10 +444,14 @@ function submitForm(){
 
 document.getElementById("checkout").style.display = "none";
 
+document.getElementById("cartBox").style.display = "none";
+
 document.getElementById("popup").style.display = "block";
 
 setTimeout(()=>{
-document.forms[0].submit();
+
+document.forms["orders"].submit();
+
 },1200);
 
 return false;
