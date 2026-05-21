@@ -358,7 +358,10 @@ document.getElementById("img").src=current.i;
 document.getElementById("name").innerText=current.n;
 
 document.getElementById("waBtn").href =
-"https://wa.me/8801611111523?text=I want to order " + current.n;
+
+"https://wa.me/8801611111523?text=I want to order%20" 
++ encodeURIComponent(current.n)
++ "%20from%20ZENORÉ";
 
 }
 
